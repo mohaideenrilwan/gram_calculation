@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Price to Gram Calculator</title>
+    <!-- Favicon / Tab Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white' font-family='Arial'%3E₹%3C/text%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -30,40 +32,20 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .logo-section {
+        .header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
-        .logo-circle {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-        }
-
-        .logo-circle svg {
-            width: 40px;
-            height: 40px;
-            fill: white;
-        }
-
-        .logo-text {
-            font-size: 1.3rem;
-            font-weight: 800;
+        .header h1 {
+            font-size: 1.5rem;
             color: #333;
-            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
-        .logo-subtitle {
-            font-size: 0.85rem;
+        .header p {
             color: #888;
-            margin-top: 4px;
+            font-size: 0.9rem;
         }
 
         .input-group {
@@ -280,35 +262,21 @@
                 min-width: 80px;
                 font-size: 0.9rem;
             }
-            .logo-circle {
-                width: 64px;
-                height: 64px;
-            }
-            .logo-circle svg {
-                width: 32px;
-                height: 32px;
-            }
-            .logo-text {
-                font-size: 1.1rem;
-            }
         }
     </style>
 <base target="_blank">
 </head>
 <body>
     <div class="container">
-        <div class="logo-section">
-            <div class="logo-circle">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            </div>
-            <div class="logo-text">GramCalc</div>
-            <div class="logo-subtitle">Price to Weight Converter</div>
+        <div class="header">
+            <h1>₹ Gram Calculator</h1>
+            <p>Calculate grams for customer's budget</p>
         </div>
 
         <div class="input-group">
             <label>Original Price (per kg)</label>
             <div class="input-wrapper">
-                <span class="icon">RS.</span>
+                <span class="icon">₹</span>
                 <input type="number" id="originalPrice" placeholder="2000" value="2000">
                 <span class="unit">/kg</span>
             </div>
@@ -317,16 +285,16 @@
         <div class="input-group">
             <label>Customer's Budget</label>
             <div class="input-wrapper">
-                <span class="icon">RS.</span>
+                <span class="icon">₹</span>
                 <input type="number" id="customerPrice" placeholder="300" value="300">
             </div>
         </div>
 
         <div class="preset-buttons">
-            <button class="preset-btn" onclick="setPreset(100)">RS.100</button>
-            <button class="preset-btn active" onclick="setPreset(300)">Rs.300</button>
-            <button class="preset-btn" onclick="setPreset(500)">RS.500</button>
-            <button class="preset-btn" onclick="setPreset(1000)">RS.1000</button>
+            <button class="preset-btn" onclick="setPreset(100)">₹100</button>
+            <button class="preset-btn active" onclick="setPreset(300)">₹300</button>
+            <button class="preset-btn" onclick="setPreset(500)">₹500</button>
+            <button class="preset-btn" onclick="setPreset(1000)">₹1000</button>
         </div>
 
         <div class="btn-group">
@@ -342,7 +310,7 @@
             <div class="result-value" id="resultValue">150</div>
             <div class="result-unit">grams</div>
             <div class="breakdown" id="breakdown">
-                RS.300 ÷ RS.2000 × 1000g = 150g
+                ₹300 ÷ ₹2000 × 1000g = 150g
             </div>
         </div>
 
@@ -356,7 +324,7 @@
             document.getElementById('customerPrice').value = amount;
             document.querySelectorAll('.preset-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent === 'RS.' + amount) {
+                if (btn.textContent === '₹' + amount) {
                     btn.classList.add('active');
                 }
             });
@@ -377,7 +345,7 @@
 
             document.getElementById('resultValue').textContent = roundedGrams;
             document.getElementById('breakdown').innerHTML = 
-                `RS.${customerPrice} ÷ RS.${originalPrice} × 1000g = <strong>${roundedGrams}g</strong>`;
+                `₹${customerPrice} ÷ ₹${originalPrice} × 1000g = <strong>${roundedGrams}g</strong>`;
 
             const resultCard = document.getElementById('resultCard');
             resultCard.classList.add('show');
