@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Price to Gram Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+        }
+
+        .logo-circle svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #333;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-wrapper .icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .input-wrapper .unit {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin: 8px 0 20px;
+        }
+
+        .calculate-btn {
+            flex: 1;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calculate-btn:active {
+            transform: scale(0.98);
+        }
+
+        .clear-btn {
+            padding: 18px 20px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 100px;
+        }
+
+        .clear-btn:active {
+            transform: scale(0.98);
+        }
+
+        .clear-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 28px;
+            color: white;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.4s ease;
+        }
+
+        .result-card.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .result-unit {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .breakdown {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            flex: 1;
+            min-width: 70px;
+            padding: 10px;
+            background: #f5f5f5;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .formula-box strong {
+            color: #333;
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 24px 16px;
+            }
+            .result-value {
+                font-size: 2rem;
+            }
+            .btn-group {
+                gap: 8px;
+            }
+            .clear-btn {
+                padding: 16px 14px;
+                min-width: 80px;
+                font-size: 0.9rem;
+            }
+            .logo-circle {
+                width: 64px;
+                height: 64px;
+            }
+            .logo-circle svg {
+                width: 32px;
+                height: 32px;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-circle">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            </div>
+            <div class="logo-text">GramCalc</div>
+            <div class="logo-subtitle">Price to Weight Converter</div>
+        </div>
+
+        <div class="input-group">
+            <label>Original Price (per kg)</label>
+            <div class="input-wrapper">
+                <span class="icon">₹</span>
+                <input type="number" id="originalPrice" placeholder="2000" value="2000">
+                <span class="unit">/kg</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Customer's Budget</label>
+            <div class="input-wrapper">
+                <span class="icon">₹</span>
+                <input type="number" id="customerPrice" placeholder="300" value="300">
+            </div>
+        </div>
+
+        <div class="preset-buttons">
+            <button class="preset-btn" onclick="setPreset(100)">₹100</button>
+            <button class="preset-btn active" onclick="setPreset(300)">₹300</button>
+            <button class="preset-btn" onclick="setPreset(500)">₹500</button>
+            <button class="preset-btn" onclick="setPreset(1000)">₹1000</button>
+        </div>
+
+        <div class="btn-group">
+            <button class="calculate-btn" onclick="calculate()">Calculate</button>
+            <button class="clear-btn" onclick="clearAll()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                Clear
+            </button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label">Customer gets</div>
+            <div class="result-value" id="resultValue">150</div>
+            <div class="result-unit">grams</div>
+            <div class="breakdown" id="breakdown">
+                ₹300 ÷ ₹2000 × 1000g = 150g
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <strong>Formula:</strong> (Customer Price ÷ Original Price) × 1000 = Grams
+        </div>
+    </div>
+
+    <script>
+        function setPreset(amount) {
+            document.getElementById('customerPrice').value = amount;
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === '₹' + amount) {
+                    btn.classList.add('active');
+                }
+            });
+            calculate();
+        }
+
+        function calculate() {
+            const originalPrice = parseFloat(document.getElementById('originalPrice').value) || 0;
+            const customerPrice = parseFloat(document.getElementById('customerPrice').value) || 0;
+
+            if (originalPrice <= 0 || customerPrice < 0) {
+                alert('Please enter valid prices');
+                return;
+            }
+
+            const grams = (customerPrice / originalPrice) * 1000;
+            const roundedGrams = Math.round(grams * 100) / 100;
+
+            document.getElementById('resultValue').textContent = roundedGrams;
+            document.getElementById('breakdown').innerHTML = 
+                `₹${customerPrice} ÷ ₹${originalPrice} × 1000g = <strong>${roundedGrams}g</strong>`;
+
+            const resultCard = document.getElementById('resultCard');
+            resultCard.classList.add('show');
+
+            // Haptic feedback on mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('originalPrice').value = '';
+            document.getElementById('customerPrice').value = '';
+            document.getElementById('resultCard').classList.remove('show');
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([30, 50, 30]);
+            }
+
+            document.getElementById('originalPrice').focus();
+        }
+
+        // Auto-calculate on input
+        document.getElementById('originalPrice').addEventListener('input', calculate);
+        document.getElementById('customerPrice').addEventListener('input', calculate);
+
+        // Calculate on load
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>
