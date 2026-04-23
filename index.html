@@ -308,7 +308,7 @@
         <div class="input-group">
             <label>Original Price (per kg)</label>
             <div class="input-wrapper">
-                <span class="icon">₹</span>
+                <span class="icon">RS.</span>
                 <input type="number" id="originalPrice" placeholder="2000" value="2000">
                 <span class="unit">/kg</span>
             </div>
@@ -317,16 +317,16 @@
         <div class="input-group">
             <label>Customer's Budget</label>
             <div class="input-wrapper">
-                <span class="icon">₹</span>
+                <span class="icon">RS.</span>
                 <input type="number" id="customerPrice" placeholder="300" value="300">
             </div>
         </div>
 
         <div class="preset-buttons">
-            <button class="preset-btn" onclick="setPreset(100)">₹100</button>
-            <button class="preset-btn active" onclick="setPreset(300)">₹300</button>
-            <button class="preset-btn" onclick="setPreset(500)">₹500</button>
-            <button class="preset-btn" onclick="setPreset(1000)">₹1000</button>
+            <button class="preset-btn" onclick="setPreset(100)">RS.100</button>
+            <button class="preset-btn active" onclick="setPreset(300)">Rs.300</button>
+            <button class="preset-btn" onclick="setPreset(500)">RS.500</button>
+            <button class="preset-btn" onclick="setPreset(1000)">RS.1000</button>
         </div>
 
         <div class="btn-group">
@@ -342,7 +342,7 @@
             <div class="result-value" id="resultValue">150</div>
             <div class="result-unit">grams</div>
             <div class="breakdown" id="breakdown">
-                ₹300 ÷ ₹2000 × 1000g = 150g
+                RS.300 ÷ RS.2000 × 1000g = 150g
             </div>
         </div>
 
@@ -356,7 +356,7 @@
             document.getElementById('customerPrice').value = amount;
             document.querySelectorAll('.preset-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent === '₹' + amount) {
+                if (btn.textContent === 'RS.' + amount) {
                     btn.classList.add('active');
                 }
             });
@@ -377,7 +377,7 @@
 
             document.getElementById('resultValue').textContent = roundedGrams;
             document.getElementById('breakdown').innerHTML = 
-                `₹${customerPrice} ÷ ₹${originalPrice} × 1000g = <strong>${roundedGrams}g</strong>`;
+                `RS.${customerPrice} ÷ RS.${originalPrice} × 1000g = <strong>${roundedGrams}g</strong>`;
 
             const resultCard = document.getElementById('resultCard');
             resultCard.classList.add('show');
