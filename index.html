@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Price to Gram Calculator</title>
-    <!-- Favicon / Tab Logo - Sri Lankan Rupees Rs -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d32f2f'/%3E%3Ctext x='50' y='62' font-size='45' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3ERs%3C/text%3E%3C/svg%3E">
+    <!-- Favicon / Tab Logo - Sri Lankan Rupees රු symbol -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d32f2f'/%3E%3Ctext x='50' y='62' font-size='45' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'%3Eරු%3C/text%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -32,20 +32,40 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .header {
+        .logo-section {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .header h1 {
-            font-size: 1.5rem;
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 24px rgba(211, 47, 47, 0.4);
+        }
+
+        .logo-circle span {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 800;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
             color: #333;
-            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
-        .header p {
+        .logo-subtitle {
+            font-size: 0.85rem;
             color: #888;
-            font-size: 0.9rem;
+            margin-top: 4px;
         }
 
         .input-group {
@@ -264,15 +284,28 @@
                 min-width: 80px;
                 font-size: 0.9rem;
             }
+            .logo-circle {
+                width: 64px;
+                height: 64px;
+            }
+            .logo-circle span {
+                font-size: 2rem;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
         }
     </style>
 <base target="_blank">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Rs Gram Calculator</h1>
-            <p>Calculate grams for customer's budget</p>
+        <div class="logo-section">
+            <div class="logo-circle">
+                <span>රු</span>
+            </div>
+            <div class="logo-text">GramCalc</div>
+            <div class="logo-subtitle">Price to Weight Converter</div>
         </div>
 
         <div class="input-group">
